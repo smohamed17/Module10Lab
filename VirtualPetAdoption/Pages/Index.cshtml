@@ -1,0 +1,44 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Pet Matching Quiz";
+}
+ 
+ <!-- this is the header for the page-->
+<div class="text-center">
+    <h1 class="display-4">Virtual Pet Adoption</h1>
+    <p>Answer two quick questions to meet your perfect pet.</p>
+</div>
+ 
+
+<!-- this is the collection of user's name and their energy preferences in a pet. -->
+<form method="post">
+    <!-- this is the text box for the name. -->
+    <div class="mb-3">
+        <label asp-for="Name" class="form-label">What is your name?</label>
+        <input asp-for="Name" class="form-control" required />
+    </div>
+    <!-- this is the dropdown for the energy level. --> 
+    <div class="mb-3">
+        <label asp-for="EnergyPreference" class="form-label">How much energy do you have for a pet?</label>
+        <select asp-for="EnergyPreference" class="form-select" required>
+            <option value="">Select one</option>
+            <option value="1">1 Very low. I want a calm pet.</option>
+            <option value="2">2 Low.</option>
+            <option value="3">3 Medium.</option>
+            <option value="4">4 High.</option>
+            <option value="5">5 Very high. I want an active pet.</option>
+        </select>
+    </div> 
+    <!-- this is the submit button for the find my pet option. -->
+    <button type="submit" class="btn btn-primary">Find My Pet</button>
+</form>
+ <!-- this is the C# code, if the match isn't null, it will display the pet. Otherwise, it won't show any pets. -->
+@if (Model.Match != null)
+{
+    <div class="alert alert-success mt-4">
+        <h2>@Model.Name, meet @Model.Match.Name! @Model.Match.Emoji</h2>
+        <p>@Model.Match.Species: @Model.Match.Description</p>
+        <p>Energy level: @Model.Match.EnergyLevel out of 5.</p>
+    </div>
+}
